@@ -23,7 +23,30 @@ fig.add_trace(
         name="SPY Price"
     )
 )
+# macro events
+events = [
+    {"event": "CPI", "time": "2026-05-13 08:30", "color": "red"},
+    {"event": "NFP", "time": "2026-05-02 08:30", "color": "yellow"},
+    {"event": "FED", "time": "2026-05-07 14:00", "color": "green"},
+]
 
+
+# add vertical lines
+for event in events:
+    fig.add_vline(
+        x=event["time"],
+        line_width=2,
+        line_dash="dash",
+        line_color=event["color"]
+    )
+
+    fig.add_annotation(
+        x=event["time"],
+        y=max(df[("Close", "SPY")]),
+        text=event["event"],
+        showarrow=True,
+        arrowhead=1
+    )
 # layout
 fig.update_layout(
     title="SPY 1-hour chart of 1-month periods.",

@@ -95,10 +95,29 @@ for event in events:
             move / event_price
         ) * 100
 
+        # market direction
+        if reaction_pct > 0:
+            direction = "Bullish"
+        else:
+            direction = "Bearish"
+        # reaction strength
+        abs_reaction = abs(reaction_pct)
+
+        if abs_reaction < 0.3:
+            strength = "Weak"
+
+        elif abs_reaction < 0.7:
+            strength = "Moderate"
+
+        else:
+            strength = "Strong"
+
         # store result
         event_results.append({
             "event": event["event"],
-            "reaction": reaction_pct
+            "reaction": reaction_pct,
+            "direction": direction,
+            "strength": strength
         })
 
         # chart annotation
@@ -116,6 +135,8 @@ for event in events:
         print(f"3H Later Price: {future_price:.2f}")
         print(f"Point Move: {move:.2f}")
         print(f"Reaction %: {reaction_pct:.2f}%")
+        print(f"Direction: {direction}")
+        print(f"Strength: {strength}")
 
 # -------------------------
 # STRONGEST EVENT ANALYSIS
@@ -133,7 +154,20 @@ print(
     f"had the strongest reaction: "
     f"{strongest_event['reaction']:.2f}%"
 )
+# -------------------------
+# EVENT SUMMARY TABLE
+# -------------------------
 
+print("\n===== EVENT SUMMARY =====")
+
+for result in event_results:
+
+    print(
+        f"{result['event']} | "
+        f"{result['reaction']:.2f}% | "
+        f"{result['direction']} | "
+        f"{result['strength']}"
+    )
 # layout
 fig.update_layout(
     title="SPY 1-hour chart of 1-month periods.",

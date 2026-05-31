@@ -1,36 +1,19 @@
- Macro Event Reaction Analytics Platform
+# Macro Event Tracker
 
-A Python-based quantitative finance project that analyzes how financial markets react to major macroeconomic events such as CPI, NFP, PMI, and Federal Reserve rate decisions.
+A Python-based financial analytics dashboard that analyzes market reactions to macroeconomic events using yfinance, Plotly, and Streamlit.
 
- Features
-
-* Fetch market data using yfinance
-* Interactive financial visualization with Plotly
-* Macro event tracking
-* Event-driven market analysis
-* Multi-asset support (planned)
-
- Tech Stack
+## Technologies
 
 * Python
 * Pandas
 * yfinance
 * Plotly
-* Git & GitHub
+* Streamlit
 
- Current Progress
+## Status
 
-* ✅ SPY market data pipeline
-* ✅ Interactive Plotly visualization
-* ✅ GitHub integration
-* 🚧 Macro event integration in progress
+Project currently under development.
 
- Run Project
-
-```bash
-pip install -r requirements.txt
-python main.py
-```
 
  Author
  Shreya Farsaiya

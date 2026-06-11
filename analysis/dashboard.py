@@ -18,6 +18,16 @@ df = yf.download(
     interval="1h"
 )
 
+# returns
+df["Returns"] = df[("Close", ticker)].pct_change()
+
+# rolling volatility
+df["Volatility"] = (
+    df["Returns"]
+    .rolling(window=10)
+    .std()
+)
+
 # create chart
 fig = go.Figure()
 
@@ -86,3 +96,23 @@ event_df = pd.DataFrame(events_data)
 st.subheader("Event Summary")
 
 st.dataframe(event_df)
+
+st.subheader("Volatility Chart")
+
+vol_fig = go.Figure()
+
+vol_fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["Volatility"],
+        mode="lines",
+        name="Volatility"
+    )
+)
+
+vol_fig.update_layout(
+    title=f"{ticker} Rolling Volatility",
+    template="plotly_dark"
+)
+
+st.plotly_chart(vol_fig)

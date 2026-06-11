@@ -1,6 +1,18 @@
 # Macro Event Tracker
 
-A Python-based financial analytics dashboard that analyzes market reactions to macroeconomic events using yfinance, Plotly, and Streamlit.
+## Overview
+
+Macro Event Tracker is a financial analytics dashboard built with Python. It analyzes market data and visualizes the impact of macroeconomic events using interactive charts.
+
+## Features
+
+* Interactive Streamlit dashboard
+* Asset selection (SPY, QQQ, DIA)
+* Real-time market data from Yahoo Finance
+* Interactive Plotly charts
+* Market insights metrics
+* Event summary table
+* Rolling volatility analysis
 
 ## Technologies
 
@@ -10,12 +22,10 @@ A Python-based financial analytics dashboard that analyzes market reactions to m
 * Plotly
 * Streamlit
 
-## Status
+## Run the Project
 
-Project currently under development.
+streamlit run analysis/dashboard.py
 
+## Project Status
 
- Author
- Shreya Farsaiya
-
-Shreya Farsaiya
+Currently under active development. Additional analytics and automation features will be added in future versions.

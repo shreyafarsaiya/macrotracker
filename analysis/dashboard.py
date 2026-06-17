@@ -18,6 +18,20 @@ df = yf.download(
     interval="1h"
 )
 
+df["MA10"] = (
+    df[("Close", ticker)]
+    .rolling(window=10)
+    .mean()
+)
+
+
+
+df["MA30"] = (
+    df[("Close", ticker)]
+    .rolling(window=30)
+    .mean()
+)
+
 # returns
 df["Returns"] = df[("Close", ticker)].pct_change()
 
@@ -40,6 +54,27 @@ fig.add_trace(
     )
 )
 
+
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["MA10"],
+        mode="lines",
+        name="10H Moving Average"
+    )
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=df.index,
+        y=df["MA30"],
+        mode="lines",
+        name="30H Moving Average"
+    )
+)
+
+
+
 # chart layout
 fig.update_layout(
     title=f"{ticker} Market Chart",
@@ -57,7 +92,7 @@ events_data = [
 
 st.subheader("Market Insights")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 strongest_event = max(
     events_data,
@@ -67,6 +102,30 @@ strongest_event = max(
 strongest_reaction = strongest_event["Reaction %"]
 
 strongest_event = strongest_event["Event"]
+
+current_price = df[("Close", ticker)].iloc[-1]
+
+current_ma = df["MA10"].iloc[-1]
+
+current_ma30 = df["MA30"].iloc[-1]
+
+if current_ma > current_ma30:
+    crossover_signal = "Bullish 🚀"
+else:
+    crossover_signal = "Bearish 📉"
+
+
+distance_pct = (
+    (current_price - current_ma)
+    / current_ma
+) * 100
+
+
+
+if current_price > current_ma:
+    trend = "Bullish"
+else:
+    trend = "Bearish"
 
 if strongest_reaction > 0:
     market_direction = "Bullish"
@@ -90,6 +149,38 @@ with col3:
         "Market Direction",
         market_direction
     )
+
+with col4:
+    st.metric(
+        "Trend vs MA10",
+        trend
+    )
+col5, col6, col7, col8 = st.columns(4)
+
+with col5:
+    st.metric(
+        "Current Price",
+        f"{current_price:.2f}"
+    )
+
+with col6:
+    st.metric(
+        "MA10",
+        f"{current_ma:.2f}"
+    )
+
+with col7:
+    st.metric(
+        "Distance %",
+        f"{distance_pct:.2f}%"
+    )
+
+with col8:
+    st.metric(
+        "MA Crossover",
+        crossover_signal
+    )
+
 # Event Summary Table
 event_df = pd.DataFrame(events_data)
 

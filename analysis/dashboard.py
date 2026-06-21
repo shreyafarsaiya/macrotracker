@@ -32,6 +32,28 @@ df["MA30"] = (
     .mean()
 )
 
+# MA Crossover Signal
+df["Signal"] = 0
+
+df.loc[
+    df["MA10"] > df["MA30"],
+    "Signal"
+] = 1
+
+df.loc[
+    df["MA10"] < df["MA30"],
+    "Signal"
+] = -1
+
+# detect position
+df["Position"] = df["Signal"].diff()
+
+# Buy signals
+buy_signals = df[df["Position"] == 2]
+
+# Sell signals
+sell_signals = df[df["Position"] == -2]
+
 # returns
 df["Returns"] = df[("Close", ticker)].pct_change()
 
@@ -73,7 +95,35 @@ fig.add_trace(
     )
 )
 
+# buy markers
+fig.add_trace(
+    go.Scatter(
+        x=buy_signals.index,
+        y=buy_signals[("Close", ticker)],
+        mode="markers",
+        name="BUY",
+        marker=dict(
+            size=12,
+            color="green",
+            symbol="triangle-up"
+        )
+    )
+)
 
+#sell markers
+fig.add_trace(
+    go.Scatter(
+        x=sell_signals.index,
+        y=sell_signals[("Close", ticker)],
+        mode="markers",
+        name="SELL",
+        marker=dict(
+            size=12,
+            color="red",
+            symbol="triangle-down"
+        )
+    )
+)
 
 # chart layout
 fig.update_layout(

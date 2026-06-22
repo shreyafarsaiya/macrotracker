@@ -54,6 +54,13 @@ buy_signals = df[df["Position"] == 2]
 # Sell signals
 sell_signals = df[df["Position"] == -2]
 
+buy_count = len(buy_signals)
+
+sell_count = len(sell_signals)
+
+total_trades = buy_count + sell_count
+
+
 # returns
 df["Returns"] = df[("Close", ticker)].pct_change()
 
@@ -155,6 +162,22 @@ strongest_event = strongest_event["Event"]
 
 current_price = df[("Close", ticker)].iloc[-1]
 
+# Performance Statistics
+
+start_price = df[("Close", ticker)].iloc[0]
+
+highest_price = df[("Close", ticker)].max()
+
+lowest_price = df[("Close", ticker)].min()
+
+average_price = df[("Close", ticker)].mean()
+
+monthly_return = (
+    (current_price - start_price)
+    / start_price
+) * 100
+
+
 current_ma = df["MA10"].iloc[-1]
 
 current_ma30 = df["MA30"].iloc[-1]
@@ -163,6 +186,13 @@ if current_ma > current_ma30:
     crossover_signal = "Bullish 🚀"
 else:
     crossover_signal = "Bearish 📉"
+
+if current_ma > current_ma30:
+    recommendation = "BUY 🟢"
+    reason = "MA10 is above MA30"
+else:
+    recommendation = "SELL 🔴"
+    reason = "MA10 is below MA30"
 
 
 distance_pct = (
@@ -230,6 +260,105 @@ with col8:
         "MA Crossover",
         crossover_signal
     )
+
+
+st.subheader("Performance Statistics")
+
+col9, col10, col11, col12 = st.columns(4)
+
+with col9:
+    st.metric(
+        "Highest Price",
+        f"{highest_price:.2f}"
+    )
+
+with col10:
+    st.metric(
+        "Lowest Price",
+        f"{lowest_price:.2f}"
+    )
+
+with col11:
+    st.metric(
+        "Average Price",
+        f"{average_price:.2f}"
+    )
+
+with col12:
+    st.metric(
+        "Monthly Return %",
+        f"{monthly_return:.2f}%"
+    )
+
+st.subheader("Signal Summary")
+
+col13, col14, col15 = st.columns(3)
+
+with col13:
+    st.metric(
+        "Buy Signals",
+        buy_count
+    )
+
+with col14:
+    st.metric(
+        "Sell Signals",
+        sell_count
+    )
+
+with col15:
+    st.metric(
+        "Current Signal",
+        crossover_signal
+    )
+st.subheader("Strategy Performance")
+
+col16, col17, col18 = st.columns(3)
+
+with col16:
+    st.metric(
+        "Total Trades",
+        total_trades
+    )
+
+with col17:
+    st.metric(
+        "Buy Signals",
+        buy_count
+    )
+
+with col18:
+    st.metric(
+        "Sell Signals",
+        sell_count
+    )
+st.subheader("Trading Recommendation")
+
+col19, col20 = st.columns(2)
+
+with col19:
+    st.metric(
+        "Recommendation",
+        recommendation
+    )
+
+with col20:
+    st.write("**Reason**")
+    st.write(reason)
+
+
+#download button
+st.subheader("Download Data")
+
+csv = df.to_csv().encode("utf-8")
+
+st.download_button(
+    label="📥 Download Market Data",
+    data=csv,
+    file_name=f"{ticker}_market_data.csv",
+    mime="text/csv"
+)
+
 
 # Event Summary Table
 event_df = pd.DataFrame(events_data)

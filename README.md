@@ -1,32 +1,78 @@
 # 📈 Macro Event Tracker
 
-A Streamlit-based financial market dashboard that analyzes ETF performance using technical indicators, volatility analysis, and moving average crossover signals.
+A professional financial analytics dashboard built with **Python**, **Streamlit**, **Pandas**, **Plotly**, and **Yahoo Finance API**.
 
-## 🚀 Project Overview
-
-Macro Event Tracker helps users visualize market trends and identify potential trading opportunities by combining:
-
-* Real-time market data
-* Technical indicators
-* Trend analysis
-* Volatility tracking
-* Buy/Sell signal generation
-
-The dashboard currently supports:
-
-* SPY (S&P 500 ETF)
-* QQQ (NASDAQ-100 ETF)
-* DIA (Dow Jones ETF)
+The application helps traders and investors monitor market behavior using technical indicators, trading signals, volatility analysis, and performance statistics through an interactive dashboard.
 
 ---
 
-# 📊 Dashboard Screenshots
+## 🚀 Features
+
+### 📊 Interactive Market Dashboard
+
+* Real-time ETF market data
+* Supports:
+
+  * SPY (S&P 500 ETF)
+  * QQQ (NASDAQ 100 ETF)
+  * DIA (Dow Jones ETF)
+
+### 📉 Technical Analysis
+
+* 10-Hour Moving Average (MA10)
+* 30-Hour Moving Average (MA30)
+* Moving Average Crossover Detection
+
+### 🟢 Trading Signals
+
+* Automatic BUY signal generation
+* Automatic SELL signal generation
+* Visual markers displayed directly on the chart
+
+### 📈 Market Insights
+
+* Current Price Tracking
+* Market Direction Analysis
+* Trend Identification
+* Distance from MA10
+* Strongest Macro Event Impact
+
+### 📋 Performance Statistics
+
+* Highest Price
+* Lowest Price
+* Average Price
+* Monthly Return %
+
+### ⚡ Strategy Analytics
+
+* Total Trades Generated
+* Buy Signal Count
+* Sell Signal Count
+* Current Strategy Status
+
+### 🎯 Trading Recommendation Engine
+
+* BUY / SELL recommendation
+* Recommendation reasoning based on MA crossover analysis
+
+### 🌪️ Volatility Analysis
+
+* Rolling Volatility Calculation
+* Volatility Trend Visualization
+
+### 📥 Data Export
+
+* Download market data as CSV
+* Export for further analysis
+
+---
+
+# 🖼️ Dashboard Screenshots
 
 ## Main Dashboard
 
 ![Dashboard](screenshots/dashboard.png)
-
-Displays live asset prices with MA10 and MA30 moving averages.
 
 ---
 
@@ -34,52 +80,23 @@ Displays live asset prices with MA10 and MA30 moving averages.
 
 ![Market Insights](screenshots/market%20insight.png)
 
-Provides trend analysis, market direction, strongest event reaction, and moving average crossover signals.
-
 ---
 
 ## Performance Statistics
 
 ![Performance Statistics](screenshots/performance_stats.png)
 
-Shows:
+---
 
-* Highest Price
-* Lowest Price
-* Average Price
-* Monthly Return %
+## Strategy Performance
+
+![Strategy Performance](screenshots/strategy_performance.png)
 
 ---
 
 ## Volatility Analysis
 
-![Volatility Chart](screenshots/volatility_chart.png)
-
-Tracks rolling volatility using hourly returns to measure market risk and price fluctuations.
-
----
-
-# ⚙️ Features
-
-✅ Live market data from Yahoo Finance
-
-✅ Interactive Plotly visualizations
-
-✅ MA10 (Short-Term Trend)
-
-✅ MA30 (Long-Term Trend)
-
-✅ Bullish/Bearish trend detection
-
-✅ Moving Average Crossover Signals
-
-✅ Buy/Sell Signal Generation
-
-✅ Volatility Analysis
-
-✅ Performance Statistics
-
-✅ Streamlit Dashboard Interface
+![Volatility Analysis](screenshots/volatility_chart.png)
 
 ---
 
@@ -89,54 +106,74 @@ Tracks rolling volatility using hourly returns to measure market risk and price 
 * Streamlit
 * Pandas
 * Plotly
-* yFinance
+* Yahoo Finance (yFinance)
+* Git & GitHub
 
 ---
 
-# 📈 Trading Logic
+# 📂 Project Structure
 
-### Moving Average Crossover Strategy
+```text
+macrotracker/
+│
+├── analysis/
+│   ├── dashboard.py
+│   └── visualize.py
+│
+├── api/
+│   └── market_api.py
+│
+├── screenshots/
+│   ├── dashboard.png
+│   ├── market insight.png
+│   ├── performance_stats.png
+│   ├── strategy_performance.png
+│   └── volatility_chart.png
+│
+├── README.md
+├── requirements.txt
+└── macrotracker.py
+```
 
-**Bullish Signal 🚀**
+# ⚙️ Installation
 
-When:
+Clone the repository:
 
-MA10 > MA30
+```bash
+git clone https://github.com/shreyafarsaiya/macrotracker.git
+```
 
-This suggests short-term momentum is stronger than the long-term trend.
+Move into the project directory:
 
-**Bearish Signal 📉**
+```bash
+cd macrotracker
+```
 
-When:
+Install dependencies:
 
-MA10 < MA30
+```bash
+pip install -r requirements.txt
+```
 
-This suggests weakening momentum and potential downside risk.
+Run the dashboard:
+
+```bash
+streamlit run analysis/dashboard.py
+```
 
 ---
 
-# 🎯 What I Learned
+# 🎯 Key Learnings
 
-Through this project I learned:
+This project demonstrates:
 
-* Financial data analysis
-* Technical indicators
-* Market trend detection
-* Data visualization with Plotly
-* Dashboard development with Streamlit
-* Git & GitHub workflow
-* Project documentation
-
----
-
-# 🔮 Future Improvements
-
-* Real macroeconomic event integration
-* CSV export functionality
-* Signal summary panel
-* Multi-asset comparison
-* Strategy backtesting
-* Portfolio performance tracking
+* Financial Data Analysis
+* Data Visualization
+* Technical Indicators
+* Trading Signal Generation
+* Dashboard Development
+* Python Automation
+* Git & GitHub Workflow
 
 ---
 
@@ -146,4 +183,17 @@ Through this project I learned:
 
 BCA (AI & ML) Student
 
-Passionate about Data Analytics, Financial Markets, and AI Applications.
+GitHub: https://github.com/shreyafarsaiya
+
+LinkedIn: https://www.linkedin.com/in/shreya-farsaiya-ba8135377/
+
+---
+
+## ⭐ Future Improvements
+
+* Live Macro Event Calendar
+* Sentiment Analysis Integration
+* AI-Based Trading Recommendations
+* Portfolio Backtesting Engine
+* Social Arbitrage Analytics
+* Multi-Asset Support
